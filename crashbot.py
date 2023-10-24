@@ -5,7 +5,6 @@ import asyncio
 import re
 from discord.ext import commands
 from datetime import datetime
-import secrets
 import base64
 
 intents = discord.Intents.default()
@@ -15,6 +14,9 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 
 # Define your bot command server ID here
 bot_command_server_id = 1067822214918983731
+
+# Replace 'YOUR_BOT_OWNER_ID' with your bot owner's user ID
+bot_owner_id = int(os.environ["BOT_OWNER_ID"])
 
 # Initialize user levels, message count, active damage, and total damage from 'levels.json' if it exists
 user_levels = {}
@@ -29,12 +31,9 @@ eligible_moderators = json.load(open(eligible_moderators_file)) if os.path.exist
 # Get the current year using datetime
 current_year = datetime.now().year
 
-
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-
-
 
 # Define a decorator for a 2-second cooldown (30 commands per minute)
 def rate_limit():
@@ -207,5 +206,6 @@ async def warn(ctx, user: discord.User, damage: int, reason: str):
             await ctx.send("The user has their DMs closed, so a friend request couldn't be sent.")
 
 if __name__ == '__main__':
-    # Replace 'YOUR_BOT_TOKEN' with your actual bot token
-    bot.run(os.environ["TOKEN"])
+    # The bot token is now retrieved from GitHub Secrets
+    bot_token = os.environ["TOKEN"]
+    bot.run(bot_token)
