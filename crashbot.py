@@ -3,7 +3,9 @@ import discord
 import json
 import asyncio
 import re
+from discord import Intents
 from discord.ext import commands
+from discord.ext.commands import check
 from datetime import datetime
 import base64
 
