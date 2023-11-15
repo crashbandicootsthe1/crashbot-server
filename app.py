@@ -1,4 +1,7 @@
-from Flask import flask
+import os
+os.system("pip install Flask")
+
+from Flask import Flask
 from threading import Thread
 
 app = flask(__name__)
