@@ -3,6 +3,7 @@ import discord
 import json
 import asyncio
 import re
+from Flask import Flask
 from discord import Intents
 from discord.ext import commands
 from discord.ext.commands import check
@@ -10,7 +11,7 @@ from datetime import datetime
 import base64
 
 intents = discord.Intents.default()
-
+app = Flask(__name__)
 
 bot = commands.Bot(command_prefix='/', intents=intents)
 
@@ -208,6 +209,10 @@ async def warn(ctx, user: discord.User, damage: int, reason: str):
             await ctx.send("The user has their DMs closed, so a friend request couldn't be sent.")
 
 if __name__ == '__main__':
+    @app.route('/')
+    def hello():
+        return "hello"
+    
     # The bot token is now retrieved from GitHub Secrets
     bot_token = os.environ["TOKEN"]
     bot.run(bot_token)
