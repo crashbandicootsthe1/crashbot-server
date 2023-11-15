@@ -9,6 +9,9 @@ from discord.ext import commands
 from discord.ext.commands import check
 from datetime import datetime
 import base64
+from app import keep_alive
+
+app.keep_alive()
 
 intents = discord.Intents.default()
 app = Flask(__name__)
